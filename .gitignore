@@ -23,6 +23,11 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
+*.pyc
+*.splite3
+uploadfiles/
+
+
 
 # PyInstaller
 #  Usually these files are written by a python script from a template

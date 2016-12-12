@@ -1,0 +1,11 @@
+{% if form.errors %}
+<p>아이디나 비밀번호가 일치하지 않거나 잘못된 로그인 정보입니다.</p>
+{% endif %}
+
+<form method="POST" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p>
+        <button type="submit">로그인</button>
+    </p>
+</form>

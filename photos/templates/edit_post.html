@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% load bootstrap3 %}
+
+{% block page_title %}글 편집{% endblock %}
+
+{% block body %}
+
+<form method="POST" id="form-post" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="hidden" name="filtered_image" />
+    {# {{ form.as_p }} #}
+
+    <div id="filter_nav">
+        <p><img src="" id="preview" /></p>
+        <button value="vintage">Vintage</button>
+        <button value="sepia">Sepia</button>
+    </div>
+
+    {% bootstrap_form form %}
+
+    <p>
+        <button type="submit" class="btn btn-primary btn-lg">
+            {% bootstrap_icon "star" %} 저장</button>
+    </p>
+</form>
+
+{% endblock %}

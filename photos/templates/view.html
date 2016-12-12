@@ -1,0 +1,65 @@
+{% extends 'layout.html' %}
+{% load my_tags %}
+{% load bootstrap3 %}
+{% load cache %}
+
+{% block page_title %}글 보기{% endblock %}
+
+{% block body %}
+
+{% autoescape off %}
+{% helloworld "first" "second" kwd1="1" kwd2="2" %}
+{% endautoescape %}
+
+<div style="border: 1px solid #000;">
+{% addnim %}
+<p>현재 이용자 : {{ request.user }}</p>
+<p>작성자 : {{ post.user }}</p>
+{% end_add_nim %}
+</div>
+
+
+<h3>{{ post.pk }}번 사진</h3>
+
+{% if post.image %}
+<p><img src="{{ post.image.url }}" /></p>
+{% endif %}
+
+<div>{{ post.content }}</div>
+
+<p>
+    {{ post.created_at }}
+</p>
+<p>
+    {% if post|did_like:request.user %}
+    좋아요 취소
+    {% else %}
+    좋아요
+    {% endif %}
+</p>
+<hr/>
+{% for comment in post.comment_set.all %}
+    <div>
+    <!---    <p>{{ comment.pk }}</p> --->
+        <p>{{ comment.content }}</p>
+        <p style="color:blue;">{{ comment.user.username }}</P>
+        <form method="POST" action="{% url 'photos:delete_comment' pk=comment.pk %}">
+            {% csrf_token %}
+            <button type="submit">댓글 삭제</button>
+        </form>
+    </div>
+{% empty %}
+    <p>댓글이 없습니다.</p>
+{% endfor %}
+
+<form method="POST" action="">
+    {% csrf_token %}
+    {% bootstrap_form comment_form %}
+    <p>
+        <button type="submit" class="btn btn-primary btn-lg">
+            {% bootstrap_icon "star" %} 저장</button>
+    </p>
+</form>
+
+
+{% endblock %}

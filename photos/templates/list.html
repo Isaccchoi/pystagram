@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% load bootstrap3 %}
+
+{% block page_title %}글 목록 페이지{% endblock %}
+
+{% block body %}
+<div>
+    <h1>사진 목록</h1>
+
+    {% for post in posts %}
+    <div class="photo_container">
+        <a href="{% url 'photos:view' pk=post.pk %}">
+            {% if post.image %}
+                <p><img src={{ post.image.url }} /></p>
+            {% endif %}
+        </a>
+        <a href="{% url 'photos:view' pk=post.pk %}"><p>{{ post.content }}</p>
+        </a>
+        <p>
+        <a href="{% url 'photos:view' pk=post.pk %}">{{ post.created_at }}</a>
+        </p>
+    </div>
+    {% empty %}
+    <p>게시물이 없습니다.</p>
+    {% endfor %}
+    {#    {% bootstrap_pagination page_obj %} #}
+
+</div>
+
+{% endblock %}

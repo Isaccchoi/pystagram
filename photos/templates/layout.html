@@ -1,0 +1,22 @@
+{% load bootstrap3 %}
+{% load static from staticfiles %}
+{% load cache %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block page_title %}Pystagram{% endblock %}</title>
+        {% cache 3600 scripts_tags %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script src="{% static 'vintageJS/dist/jquery.vintage.min.js' %}"></script>
+        <script src="{% static 'vintageJS/vintage.presets.js' %}"></script>
+        <script src="{% static 'hello.js' %}"></script>
+        {% endcache %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    </head>
+
+    <body class="container">
+        <p>{{ request.just_say }}</p>
+        {% block body %}{% endblock %}
+    </body>
+</html>

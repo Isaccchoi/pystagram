@@ -1,1 +1,1 @@
-# pystagram2
+Pystagram
